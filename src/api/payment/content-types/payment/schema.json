@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "payments",
+  "info": {
+    "singularName": "payment",
+    "pluralName": "payments",
+    "displayName": "payment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": false
+    }
+  },
+  "attributes": {
+    "order": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order.order"
+    },
+    "payment_method": {
+      "type": "string",
+      "required": true
+    },
+    "payment_status": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "transaction_reference": {
+      "type": "string",
+      "required": true
+    },
+    "amount": {
+      "type": "integer",
+      "required": true
+    },
+    "currency": {
+      "type": "string",
+      "required": true
+    },
+    "raw_data": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

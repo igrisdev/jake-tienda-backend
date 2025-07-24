@@ -55,6 +55,16 @@
       "relation": "oneToMany",
       "target": "api::product.product",
       "mappedBy": "brand_id"
+    },
+    "slug": {
+      "type": "uid",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "targetField": "name",
+      "required": true
     }
   }
 }

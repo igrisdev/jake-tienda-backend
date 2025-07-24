@@ -34,7 +34,7 @@
       },
       "required": false
     },
-    "logo_url": {
+    "logo": {
       "type": "media",
       "pluginOptions": {
         "i18n": {

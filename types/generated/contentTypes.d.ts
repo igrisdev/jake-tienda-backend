@@ -437,7 +437,7 @@ export interface ApiBrandBrand extends Struct.CollectionTypeSchema {
       }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::brand.brand'>;
-    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+    logo: Schema.Attribute.Media<'files' | 'images'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -459,6 +459,40 @@ export interface ApiBrandBrand extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCarouselCarousel extends Struct.CollectionTypeSchema {
+  collectionName: 'carousels';
+  info: {
+    displayName: 'carousel';
+    pluralName: 'carousels';
+    singularName: 'carousel';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    image_or_video: Schema.Attribute.Media<
+      'images' | 'files' | 'videos',
+      true
+    > &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::carousel.carousel'
+    > &
+      Schema.Attribute.Private;
+    name_image: Schema.Attribute.String & Schema.Attribute.Required;
+    product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -490,7 +524,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+    image: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1286,6 +1320,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::brand.brand': ApiBrandBrand;
+      'api::carousel.carousel': ApiCarouselCarousel;
       'api::category.category': ApiCategoryCategory;
       'api::customer.customer': ApiCustomerCustomer;
       'api::order.order': ApiOrderOrder;

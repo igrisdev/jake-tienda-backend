@@ -410,6 +410,37 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBestProductBestProduct extends Struct.SingleTypeSchema {
+  collectionName: 'best_products';
+  info: {
+    displayName: 'best-product';
+    pluralName: 'best-products';
+    singularName: 'best-product';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    image: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::best-product.best-product'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiBrandBrand extends Struct.CollectionTypeSchema {
   collectionName: 'brands';
   info: {
@@ -465,12 +496,13 @@ export interface ApiBrandBrand extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiCarouselCarousel extends Struct.CollectionTypeSchema {
-  collectionName: 'carousels';
+export interface ApiCarouselPresentationCarouselPresentation
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'carousel_presentations';
   info: {
-    displayName: 'carousel';
-    pluralName: 'carousels';
-    singularName: 'carousel';
+    displayName: 'carousel-presentation';
+    pluralName: 'carousel-presentations';
+    singularName: 'carousel-presentation';
   };
   options: {
     draftAndPublish: true;
@@ -479,15 +511,12 @@ export interface ApiCarouselCarousel extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    image_or_video: Schema.Attribute.Media<
-      'images' | 'files' | 'videos',
-      true
-    > &
+    image_or_video: Schema.Attribute.Media<'images' | 'files' | 'videos'> &
       Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::carousel.carousel'
+      'api::carousel-presentation.carousel-presentation'
     > &
       Schema.Attribute.Private;
     name_image: Schema.Attribute.String & Schema.Attribute.Required;
@@ -530,6 +559,14 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    isImportant: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -762,6 +799,13 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
         };
       }> &
       Schema.Attribute.DefaultTo<false>;
+    images: Schema.Attribute.Media<'images' | 'files', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1319,8 +1363,9 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::best-product.best-product': ApiBestProductBestProduct;
       'api::brand.brand': ApiBrandBrand;
-      'api::carousel.carousel': ApiCarouselCarousel;
+      'api::carousel-presentation.carousel-presentation': ApiCarouselPresentationCarouselPresentation;
       'api::category.category': ApiCategoryCategory;
       'api::customer.customer': ApiCustomerCustomer;
       'api::order.order': ApiOrderOrder;

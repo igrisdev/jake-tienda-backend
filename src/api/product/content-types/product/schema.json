@@ -114,6 +114,20 @@
       "relation": "manyToOne",
       "target": "api::order.order",
       "inversedBy": "products"
+    },
+    "images": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
     }
   }
 }

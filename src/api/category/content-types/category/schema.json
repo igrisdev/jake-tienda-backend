@@ -61,6 +61,16 @@
       },
       "targetField": "name",
       "required": true
+    },
+    "isImportant": {
+      "type": "boolean",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true,
+      "default": false
     }
   }
 }

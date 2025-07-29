@@ -52,7 +52,7 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::product.product",
-      "mappedBy": "brand_id"
+      "mappedBy": "brand"
     },
     "slug": {
       "type": "uid",

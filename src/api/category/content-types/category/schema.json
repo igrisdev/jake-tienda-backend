@@ -50,7 +50,7 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::product.product",
-      "mappedBy": "category_id"
+      "mappedBy": "category"
     },
     "slug": {
       "type": "uid",

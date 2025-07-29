@@ -765,11 +765,8 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    brand_id: Schema.Attribute.Relation<'manyToOne', 'api::brand.brand'>;
-    category_id: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::category.category'
-    >;
+    brand: Schema.Attribute.Relation<'manyToOne', 'api::brand.brand'>;
+    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     color: Schema.Attribute.String &
       Schema.Attribute.CustomField<'plugin::color-picker.color'> &
       Schema.Attribute.SetPluginOptions<{

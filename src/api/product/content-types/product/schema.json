@@ -50,13 +50,13 @@
         }
       }
     },
-    "brand_id": {
+    "brand": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::brand.brand",
       "inversedBy": "products"
     },
-    "category_id": {
+    "category": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::category.category",
